@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 여행 일정을 생성 중입니다</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f8ff;
+        font-family: "Helvetica Neue", sans-serif;
+        text-align: center;
+      }
+      .progress-bar {
+        width: 80%;
+        height: 20px;
+        background-color: #ddd;
+        border-radius: 10px;
+        margin-top: 20px;
+        overflow: hidden;
+      }
+      .progress-fill {
+        height: 100%;
+        width: 0;
+        background-color: #007bff;
+        transition: width 0.3s;
+      }
+      .loading-message {
+        font-size: 1.2rem;
+        margin-top: 20px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>여행 일정을 생성하는 중입니다...</h1>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="loading-message" id="loadingMessage">잠시만 기다려주세요!</div>
+
+    <script>
+      // 1) 파라미터
+      const p = new URLSearchParams(location.search);
+      const destination = p.get("destination"),
+        startDate = p.get("startDate"),
+        endDate = p.get("endDate");
+
+      // 2) 진행바
+      const bar = document.getElementById("progressFill");
+      const msg = document.getElementById("loadingMessage");
+      const steps = [
+        `${destination}의 날씨를 조사하는 중...`,
+        `${destination}의 인기 명소를 찾는 중...`,
+        `${destination}의 맛집을 조사하는 중...`,
+        "일정을 최적화하는 중...",
+        "마지막으로 일정 정리 중...",
+      ];
+      let pct = 0,
+        idx = 0;
+      const iv = setInterval(() => {
+        pct = Math.min(pct + Math.floor(Math.random() * 5 + 3), 100);
+        bar.style.width = pct + "%";
+        if (pct > (idx + 1) * 20 && idx < steps.length - 1) {
+          idx++;
+          msg.innerText = steps[idx];
+        }
+      }, 300);
+
+      // 3) 함수 호출
+      async function fetchPlan() {
+        try {
+          // 파라미터 유효성 검사
+          if (!destination || !startDate || !endDate) {
+            clearInterval(iv);
+            alert("필수 파라미터가 누락되었습니다.");
+            return;
+          }
+
+          // 날짜 형식 검사
+          if (
+            !/^\d{4}-\d{2}-\d{2}$/.test(startDate) ||
+            !/^\d{4}-\d{2}-\d{2}$/.test(endDate)
+          ) {
+            clearInterval(iv);
+            alert(
+              "날짜 형식이 올바르지 않습니다. YYYY-MM-DD 형식을 사용하세요."
+            );
+            return;
+          }
+
+          // 데이터 정리
+          const cleanDestination = destination.trim();
+          const payload = { destination: cleanDestination, startDate, endDate };
+          const url = `https://createtravelplan-tjej7jdoqa-uc.a.run.app/createTravelPlan`;
+
+          // 서버 요청
+          const res = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          // 응답 처리
+          if (!res.ok) {
+            const errorText = await res.text();
+            console.error("서버 에러 응답:", errorText);
+            throw new Error(`서버 응답 오류: ${res.status} - ${errorText}`);
+          }
+
+          const json = await res.json();
+          clearInterval(iv);
+
+          // 결과 처리
+          const plan =
+            typeof json.result === "string"
+              ? JSON.parse(json.result)
+              : json.result;
+          const dataToStore = { plan, destination, startDate, endDate };
+          const encoded = encodeURIComponent(JSON.stringify(dataToStore));
+          const pk =
+            Date.now() + "-" + Math.random().toString(36).substring(2, 10);
+          localStorage.setItem(pk, encoded);
+
+          location.href = `result.html?plan=${pk}`;
+        } catch (e) {
+          clearInterval(iv);
+          console.error("fetchPlan 오류:", e);
+          alert(`일정 생성 중 오류가 발생했습니다: ${e.message}`);
+        }
+      }
+
+      fetchPlan();
+    </script>
+  </body>
+</html>

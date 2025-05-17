@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 여행 일정을 생성 중입니다</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; background:#f0f8ff; font-family:'Helvetica Neue',sans-serif; text-align:center; }
+    .progress-bar { width:80%; height:20px; background:#ddd; border-radius:10px; margin-top:20px; overflow:hidden; }
+    .progress-fill { height:100%; width:0; background:#007bff; transition:width .3s; }
+    .loading-message { font-size:1.2rem; margin-top:20px; color:#333; }
+  </style>
+</head>
+<body>
+  <h1>여행 일정을 생성하는 중입니다...</h1>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="loading-message" id="loadingMessage">잠시만 기다려주세요!</div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const destination = params.get('destination');
+    const startDate   = params.get('startDate');
+    const endDate     = params.get('endDate');
+
+    const progressFill   = document.getElementById('progressFill');
+    const loadingMessage = document.getElementById('loadingMessage');
+
+    const messages = [
+      `${destination}의 날씨를 조사하는 중...`,
+      `${destination}의 인기 명소를 찾는 중...`,
+      `${destination}의 맛집을 조사하는 중...`,
+      '일정을 최적화하는 중...',
+      '마지막으로 일정 정리 중...'
+    ];
+
+    let percent = 0, messageIndex = 0;
+    const progressInterval = setInterval(() => {
+      percent = Math.min(percent + Math.floor(Math.random()*5 + 3), 100);
+      progressFill.style.width = percent + '%';
+      if (percent > (messageIndex+1)*20 && messageIndex < messages.length-1) {
+        messageIndex++;
+        loadingMessage.innerText = messages[messageIndex];
+      }
+    }, 300);
+
+    async function fetchTravelPlan() {
+      try {
+        console.log('🌍 요청:', { destination, startDate, endDate });
+        // **여기에 실제로 배포된 함수 URL을 넣으세요!**
+        const FUNCTION_URL = 'https://us-central1-skytravelai.cloudfunctions.net/createTravelPlan';
+        
+        const response = await fetch(FUNCTION_URL, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ destination, startDate, endDate })
+        });
+        console.log('📨 응답 상태:', response.status);
+
+        const data = await response.json();
+        console.log('🔥 API 응답 data:', data);
+        clearInterval(progressInterval);
+
+        // data.result 는 JSON 문자열이므로 파싱
+        const planObject = typeof data.result === 'string'
+          ? JSON.parse(data.result)
+          : data.result;
+        console.log('🗒️ planObject:', planObject);
+
+        // 결과 페이지로 이동
+        const encoded = encodeURIComponent(JSON.stringify(planObject));
+        console.log(encoded);
+        //window.location.href = `result.html?plan=${encoded}`;
+
+      } catch (err) {
+        clearInterval(progressInterval);
+        console.error('❌ fetchTravelPlan 에러:', err);
+        alert('일정 생성 중 오류가 발생했습니다. 다시 시도해주세요.');
+      }
+    }
+
+    fetchTravelPlan();
+  </script>
+</body>
+</html>

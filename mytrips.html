@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>내 여행 기록</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    header a {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: #007bff;
+    }
+    .trip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .trip-card {
+      width: 300px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: relative;
+      transition: transform 0.2s;
+    }
+    .trip-card:hover {
+      transform: translateY(-5px);
+    }
+    .trip-destination {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #007bff;
+    }
+    .trip-date {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .trip-preview {
+      font-size: 0.95rem;
+      color: #333;
+      max-height: 80px;
+      overflow: hidden;
+    }
+    .delete-btn {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      color: #999;
+      cursor: pointer;
+    }
+    .delete-btn:hover {
+      color: #ff3333;
+    }
+
+    /* ✅ 반응형 추가 */
+    @media (max-width: 600px) {
+      .trip-card {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">SkyTravelsAI.com</a>
+    <h2>내가 저장한 여행 일정들</h2>
+  </header>
+
+  <div class="trip-list" id="tripList"></div>
+
+  <script>
+    const tripList = document.getElementById("tripList");
+    let trips = JSON.parse(localStorage.getItem("myTrips") || "[]");
+
+    function renderTrips() {
+      tripList.innerHTML = "";
+      if (trips.length === 0) {
+        tripList.innerHTML = '<p style="text-align:center; color:#999;">저장된 여행 일정이 없습니다.</p>';
+        return;
+      }
+
+      trips.forEach(trip => {
+        const card = document.createElement("div");
+        card.className = "trip-card";
+        card.innerHTML = `
+          <button class="delete-btn" title="삭제" data-id="${trip.id}">❌</button>
+          <div class="trip-destination">${trip.destination}</div>
+          <div class="trip-date">저장일: ${trip.date}</div>
+          <div class="trip-preview">${trip.result.slice(0, 150)}...</div>
+        `;
+        card.querySelector(".trip-preview").addEventListener("click", () => {
+          const encoded = encodeURIComponent(trip.result);
+          window.location.href = `result.html?plan=${encoded}`;
+        });
+        card.querySelector(".delete-btn").addEventListener("click", (e) => {
+          e.stopPropagation();
+          trips = trips.filter(t => t.id !== trip.id);
+          localStorage.setItem("myTrips", JSON.stringify(trips));
+          renderTrips();
+        });
+        tripList.appendChild(card);
+      });
+    }
+
+    renderTrips();
+  </script>
+</body>
+</html>

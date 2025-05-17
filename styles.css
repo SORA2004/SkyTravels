@@ -1,0 +1,237 @@
+/* 기본 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  color: #333;
+  line-height: 1.6;
+  background-color: #fff;
+}
+
+/* 헤더 */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.nav-link {
+  font-size: 1rem;
+  color: #333;
+  text-decoration: none;
+}
+
+/* 히어로 섹션 */
+.hero {
+  background: url('eva-darron-oCdVtGFeDC0-unsplash.jpg') center/cover no-repeat;
+  height: 550px;
+  position: relative;
+}
+
+/* 폼 래퍼 */
+.form-wrapper {
+  position: relative;
+  top: -80px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.form-wrapper h1 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.form-wrapper p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* 검색 폼 */
+.search-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* 목적지 입력: 전체 폭 */
+.destination-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* 날짜 입력 행 */
+.date-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.date-row input {
+  width: 45%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* 날짜 사이 구분자 */
+.date-separator {
+  font-size: 1.2rem;
+  color: #007bff;
+}
+
+/* 버튼 */
+.btn-generate {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-generate:hover {
+  background-color: #0056b3;
+}
+
+/* 기능 섹션 */
+.features {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.feature-item h3 {
+  font-size: 1.1rem;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.feature-item p {
+  font-size: 0.95rem;
+  color: #555;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+.feature-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 10px;
+  background-color: #e6f0ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-icon img {
+  width: 32px;
+  height: 32px;
+}
+
+/* 여행 일정 카드 컨테이너 */
+.trip-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* 카드 개별 스타일 */
+.trip-card {
+  width: 300px;
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.trip-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.trip-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.trip-card-content {
+  padding: 15px;
+}
+
+.trip-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.trip-card-dates {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.trip-card-summary {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+
+/* 소개 섹션 */
+.about {
+  background-color: #f8f8f8;
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* 푸터 */
+footer {
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  border-top: 1px solid #eee;
+}
+
+footer a {
+  color: #007bff;
+  text-decoration: none;
+}

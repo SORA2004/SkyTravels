@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>- SkyTravelsAI</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="result.css" />
+    <!-- result.js 먼저 로드 -->
+    <script src="result.js"></script>
+    <!-- Google Maps API는 initMap()이 정의된 후에 로드 -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1obscQGvEOLTLAwmvDjPvwx_5xOrE-GY&libraries=places&callback=renderItinerary"
+      async
+      defer
+    ></script>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo">SkyTravelsAI</div>
+      <button class="show-details">내 여행 일정 보기</button>
+    </header>
+
+    <div class="itinerary-container">
+      <div class="destination-header">
+        <h1><span class="destination"></span> 여행 일정</h1>
+        <p class="date-range">
+          <span class="calendar-icon">📅</span>
+          <span class="start-date"></span>
+          <span class="date-separator">~</span>
+          <span class="end-date"></span>
+          <span class="duration"></span>
+        </p>
+      </div>
+
+      <section class="route-overview">
+        <h2>
+          <div id="map"></div>
+          <div id="restaurant-list"></div>
+        </h2>
+
+        <div id="route-overview-content"></div>
+      </section>
+    </div>
+
+    <footer>
+      Contact Us:
+      <a href="mailto:support@skytravelsai.com">support@skytravelsai.com</a>
+    </footer>
+
+    <script>
+      document.querySelectorAll(".show-details").forEach((button) => {
+        button.addEventListener("click", function () {
+          const content = this.previousElementSibling;
+          if (content && content.classList.contains("day-content")) {
+            content.style.display =
+              content.style.display === "block" ? "none" : "block";
+            this.textContent =
+              content.style.display === "block"
+                ? "일정 접기"
+                : "일정 상세 보기";
+          }
+        });
+      });
+
+      document.querySelectorAll(".day-content").forEach((content) => {
+        content.style.display = "none";
+      });
+    </script>
+  </body>
+</html>

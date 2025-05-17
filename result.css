@@ -1,0 +1,433 @@
+.itinerary-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.destination-header {
+  margin: 30px 0 20px;
+}
+
+.destination-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.date-range {
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.start-date.date-range {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 8px 16px;
+  border-radius: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 15px auto;
+  max-width: fit-content;
+}
+
+.calendar-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.start-date, .end-date {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.date-separator {
+  margin: 0 10px;
+  color: #7f8c8d;
+  font-weight: 300;
+}
+
+.introduction, .highlights, .route-overview, .landmarks {
+  margin-bottom: 30px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+section h2 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.highlights ul {
+  list-style-type: none;
+  padding-left: 10px;
+}
+
+.highlights li {
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.highlights li:before {
+  content: "•";
+  color: #007bff;
+  font-size: 1.2rem;
+  position: absolute;
+  left: 0;
+  top: -2px;
+}
+
+.map-container {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.route-map {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.day-plan {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+}
+
+
+
+.day-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.day-content {
+  margin: 15px 0;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.weather-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 8px;
+  background-color: #f0f8ff;
+  border-radius: 6px;
+}
+
+.weather-icon {
+  font-size: 1.5rem;
+  margin-right: 10px;
+}
+
+.weather-text {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.time-slot {
+  background-color: white;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.time-slot h4 {
+  color: #007bff;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.time-slot p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.recommendations {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.rec-spots, .rec-foods {
+  background-color: white;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.rec-spots h4, .rec-foods h4 {
+  color: #007bff;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.recommendations ul {
+  list-style-type: none;
+  padding-left: 5px;
+  margin: 0;
+}
+
+.recommendations li {
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+  position: relative;
+  padding-left: 15px;
+}
+
+.recommendations li:before {
+  content: "•";
+  color: #007bff;
+  position: absolute;
+  left: 0;
+  top: -1px;
+}
+
+.day-highlights {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.show-details {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.show-details:hover {
+  background-color: #0056b3;
+}
+
+.landmark-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.landmark-item {
+  border-radius: 8px;
+  overflow: hidden;
+  height: 200px;
+}
+
+.landmark-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.landmark-img:hover {
+  transform: scale(1.05);
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px 0;
+}
+
+.google-maps-btn {
+  background-color: #2979FF;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.save-btn, .print-btn, .share-btn {
+  background-color: #f1f1f1;
+  color: #333;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.google-maps-btn:hover {
+  background-color: #1565C0;
+}
+
+.save-btn:hover, .print-btn:hover, .share-btn:hover {
+  background-color: #e0e0e0;
+}
+
+@media (max-width: 768px) {
+  .landmark-gallery {
+    grid-template-columns: 1fr;
+  }
+  
+  .schedule-grid, 
+  .recommendations {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-buttons {
+    flex-wrap: wrap;
+  }
+  
+  .google-maps-btn, .save-btn, .print-btn, .share-btn {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
+
+.spot-map, .food-map {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 180px;
+  max-height: 450px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ddd;
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+  margin: 24px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid #ddd;
+}
+
+@media screen and (max-width: 768px) {
+  #map {
+    height: 350px;
+    margin: 16px 0;
+  }
+  
+  .spot-map, .food-map {
+    min-height: 200px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #map {
+    height: 300px;
+    margin: 12px 0;
+  }
+  
+  .spot-map, .food-map {
+    min-height: 180px;
+  }
+}
+
+.map-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5;
+  color: #555;
+  font-size: 14px;
+}
+    
+.route-overview {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.route-overview h2 {
+  width: 100%;
+  max-width: 100%;
+}
+
+#route-overview-content {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.recommendations {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.recommendations > div {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.rec-spots, .rec-foods {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.rec-spots > div, .rec-foods > div {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.day-content p, 
+.time-slot p, 
+.recommendations div,
+.rec-spots h4,
+.rec-foods h4 {
+  word-break: break-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.day-plan {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.day-content {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
